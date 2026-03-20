@@ -164,8 +164,12 @@ function applyTranslations(lang) {
   const eyebrow = document.querySelector('.hero-eyebrow');
   if (eyebrow) { eyebrow.childNodes.forEach(n=>{ if(n.nodeType===3) n.textContent=t.hero_eyebrow; }); }
   const btns = document.querySelectorAll('.hero-btns a');
-  if (btns[0]) btns[0].textContent = t.hero_btn1;
-  if (btns[1]) btns[1].textContent = t.hero_btn2;
+  if (btns.length === 1) {
+    btns[0].textContent = t.hero_btn2;
+  } else {
+    if (btns[0]) btns[0].textContent = t.hero_btn1;
+    if (btns[1]) btns[1].textContent = t.hero_btn2;
+  }
   const scrollHint = document.querySelector('.hero-scroll-hint span');
   if (scrollHint) scrollHint.textContent = t.hero_scroll;
   // Trust band - update all trust items text nodes
