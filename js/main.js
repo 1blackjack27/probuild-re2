@@ -71,16 +71,36 @@ const translations = {
     proc_s2: 'Cotización', proc_s2d: 'Presupuesto detallado y transparente. Sin sorpresas al final.',
     proc_s3: 'Ejecución', proc_s3d: 'Trabajo certificado con materiales de calidad y permisos completos.',
     proc_s4: 'Entrega', proc_s4d: 'Revisión final contigo. Garantía por escrito incluida.',
+    proc_head_tag: 'Cómo Trabajamos',
+    proc_head_title: 'Tu Proyecto, <em>Paso a Paso</em>',
+    proc_card1: 'Evaluación Honesta',
+    proc_card1_desc: 'Inspeccionamos tu propiedad sin costo y sin compromiso. Te decimos exactamente lo que vemos, sin exagerar el problema.',
+    proc_card2: 'Cotización Transparente',
+    proc_card2_desc: 'Cada línea del presupuesto está justificada. Materiales, mano de obra, permisos. Todo detallado, sin líneas vagas.',
+    proc_card3: 'Ejecución Certificada',
+    proc_card3_desc: 'Trabajamos con permisos activos y personal certificado. Inspecciones del condado completadas a tiempo, siempre.',
+    proc_card4: 'Entrega y Garantía',
+    proc_card4_desc: 'Entregamos el proyecto completo con toda la documentación. Garantía escrita cubre materiales y mano de obra.',
     cta_tag: 'Contáctanos',
     cta_title: '¿Listo Para <em>Construir</em><br/>con Integridad?',
     cta_sub: 'Cotización gratuita y sin compromiso. Respuesta en menos de 2 horas.',
     cta_phone: 'Llamar Ahora',
     cta_sms: 'Enviar SMS',
+    cta_tag_alt: 'Trabajemos Juntos',
+    cta_title_alt: 'Tu Propiedad<br/>en <em>Buenas Manos</em>',
+    cta_sub_alt: 'Cotización gratuita, sin compromiso y sin letras pequeñas. Solo una conversación honesta sobre lo que necesitas.',
+    cta_whatsapp: 'Enviar Mensaje',
+    cta_divider: 'o contáctanos directamente',
+    cta_label_phone: 'Teléfono',
+    cta_label_email: 'Email',
+    cta_label_area: 'Área de Servicio',
+    cta_area: 'Miami-Dade & Broward',
     foot_copy: '© 2025 <strong>REC PROBUILD LLC</strong> — Miami, Florida. Todos los derechos reservados.',
     foot_privacy: 'Privacidad',
     foot_terms: 'Términos',
     foot_lic: 'Licencias',
-    foot_badge: 'FL Licenciado y Asegurado'
+    foot_badge: 'FL Licenciado y Asegurado',
+    wa_label: 'Contactar por WhatsApp'
   },
   en: {
     nav_philosophy: 'Philosophy',
@@ -134,16 +154,36 @@ const translations = {
     proc_s2: 'Quote', proc_s2d: 'Detailed and transparent estimate. No surprises at the end.',
     proc_s3: 'Execution', proc_s3d: 'Certified work with quality materials and complete permits.',
     proc_s4: 'Delivery', proc_s4d: 'Final review with you. Written warranty included.',
+    proc_head_tag: 'How We Work',
+    proc_head_title: 'Your Project, <em>Step by Step</em>',
+    proc_card1: 'Honest Evaluation',
+    proc_card1_desc: 'We inspect your property at no cost and with no obligation. We tell you exactly what we see, without exaggerating the problem.',
+    proc_card2: 'Transparent Quote',
+    proc_card2_desc: 'Every line of the estimate is justified. Materials, labor, permits. Everything detailed, with no vague line items.',
+    proc_card3: 'Certified Execution',
+    proc_card3_desc: 'We work with active permits and certified personnel. County inspections completed on time, always.',
+    proc_card4: 'Delivery and Warranty',
+    proc_card4_desc: 'We deliver the complete project with all documentation. Written warranty covers materials and labor.',
     cta_tag: 'Contact Us',
     cta_title: 'Ready to <em>Build</em><br/>with Integrity?',
     cta_sub: 'Free quote, no commitment. Response in less than 2 hours.',
     cta_phone: 'Call Now',
     cta_sms: 'Send SMS',
+    cta_tag_alt: 'Let\'s Work Together',
+    cta_title_alt: 'Your Property<br/>in <em>Good Hands</em>',
+    cta_sub_alt: 'Free quote, no obligation, and no fine print. Just an honest conversation about what you need.',
+    cta_whatsapp: 'Send Message',
+    cta_divider: 'or contact us directly',
+    cta_label_phone: 'Phone',
+    cta_label_email: 'Email',
+    cta_label_area: 'Service Area',
+    cta_area: 'Miami-Dade & Broward',
     foot_copy: '© 2025 <strong>REC PROBUILD LLC</strong> — Miami, Florida. All rights reserved.',
     foot_privacy: 'Privacy',
     foot_terms: 'Terms',
     foot_lic: 'Licenses',
-    foot_badge: 'FL Licensed & Insured'
+    foot_badge: 'FL Licensed & Insured',
+    wa_label: 'Contact via WhatsApp'
   }
 };
 
@@ -230,25 +270,36 @@ function applyTranslations(lang) {
   if (whyCta) whyCta.textContent = t.why_cta;
   // Process
   const procTag = document.querySelector('#process .s-tag');
-  if (procTag) procTag.textContent = t.proc_tag;
+  if (procTag) procTag.textContent = t.proc_head_tag || t.proc_tag;
   const procTitle = document.querySelector('#process .s-title');
-  if (procTitle) procTitle.innerHTML = t.proc_title;
+  if (procTitle) procTitle.innerHTML = t.proc_head_title || t.proc_title;
   const steps = document.querySelectorAll('.proc-step');
-  const procData=[{t:'proc_s1',d:'proc_s1d'},{t:'proc_s2',d:'proc_s2d'},{t:'proc_s3',d:'proc_s3d'},{t:'proc_s4',d:'proc_s4d'}];
+  const procData=[{t:'proc_card1',d:'proc_card1_desc'},{t:'proc_card2',d:'proc_card2_desc'},{t:'proc_card3',d:'proc_card3_desc'},{t:'proc_card4',d:'proc_card4_desc'}];
   steps.forEach((s,i) => {
     const tl=s.querySelector('.proc-title'); if(tl) tl.textContent=t[procData[i].t];
-    const ds=s.querySelector('.proc-desc'); if(ds) ds.textContent=t[procData[i].d];
+    const ds=s.querySelector('.proc-desc, .proc-text'); if(ds) ds.textContent=t[procData[i].d];
   });
   // CTA
   const ctaTag = document.querySelector('#cta .s-tag');
-  if (ctaTag) ctaTag.textContent = t.cta_tag;
-  const ctaTitle = document.querySelector('#cta .cta-title');
-  if (ctaTitle) ctaTitle.innerHTML = t.cta_title;
+  if (ctaTag) ctaTag.textContent = t.cta_tag_alt || t.cta_tag;
+  const ctaTitle = document.querySelector('#cta .cta-title, #cta .cta-h2');
+  if (ctaTitle) ctaTitle.innerHTML = t.cta_title_alt || t.cta_title;
   const ctaSub = document.querySelector('#cta .cta-sub');
-  if (ctaSub) ctaSub.textContent = t.cta_sub;
-  const ctaBtns = document.querySelectorAll('#cta .c-btn');
-  if (ctaBtns[0]) { const sp=ctaBtns[0].querySelector('span'); if(sp) sp.textContent=t.cta_phone; }
-  if (ctaBtns[1]) { const sp=ctaBtns[1].querySelector('span'); if(sp) sp.textContent=t.cta_sms; }
+  if (ctaSub) ctaSub.textContent = t.cta_sub_alt || t.cta_sub;
+  const ctaWhatsApp = document.querySelector('#cta .cta-btns .btn-gold');
+  if (ctaWhatsApp) {
+    const textNode = Array.from(ctaWhatsApp.childNodes).find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+    if (textNode) textNode.textContent = ' ' + t.cta_whatsapp;
+  }
+  const ctaDivider = document.querySelector('#cta .divider');
+  if (ctaDivider) ctaDivider.textContent = t.cta_divider;
+  const contactItems = document.querySelectorAll('#cta .contact-item');
+  if (contactItems[0]) { const lb=contactItems[0].querySelector('.c-label'); if(lb) lb.textContent=t.cta_label_phone; }
+  if (contactItems[1]) { const lb=contactItems[1].querySelector('.c-label'); if(lb) lb.textContent=t.cta_label_email; }
+  if (contactItems[2]) {
+    const lb=contactItems[2].querySelector('.c-label'); if(lb) lb.textContent=t.cta_label_area;
+    const val=contactItems[2].querySelector('.c-val'); if(val) val.textContent=t.cta_area;
+  }
   // Footer
   const footCopy = document.querySelector('.foot-copy');
   if (footCopy) footCopy.innerHTML = t.foot_copy;
@@ -257,6 +308,8 @@ function applyTranslations(lang) {
   footLinks.forEach((a,i)=>{ if(t[fkeys[i]]) a.textContent=t[fkeys[i]]; });
   const footBadge = document.querySelector('.foot-badge');
   if (footBadge) { const svg=footBadge.querySelector('svg'); footBadge.textContent=''; if(svg) footBadge.appendChild(svg); footBadge.appendChild(document.createTextNode(' '+t.foot_badge)); }
+  const waFloat = document.querySelector('.wa-float');
+  if (waFloat) waFloat.setAttribute('aria-label', t.wa_label);
 }
 
 document.getElementById('langToggle').addEventListener('click', function() {
