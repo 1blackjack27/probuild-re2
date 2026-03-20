@@ -95,6 +95,18 @@ const translations = {
     cta_label_email: 'Email',
     cta_label_area: 'Área de Servicio',
     cta_area: 'Miami-Dade & Broward',
+    form_name: 'Nombre',
+    form_phone: 'Teléfono',
+    form_email: 'Correo electrónico',
+    form_service: 'Servicio',
+    form_message: 'Cuéntanos qué necesitas',
+    form_name_ph: 'Tu nombre completo',
+    form_phone_ph: '(305) 555-0123',
+    form_email_ph: 'tu@email.com',
+    form_message_ph: 'Describe el proyecto, urgencia, ubicación o detalles importantes...',
+    form_submit: 'Enviar por WhatsApp',
+    form_helper: 'Tu mensaje se abrirá en WhatsApp con los datos ya organizados para enviarlo en un toque.',
+    form_services: ['Electricidad', 'Plomería', 'Techos', 'Construcción', 'Otro'],
     foot_copy: '© 2025 <strong>REC PROBUILD LLC</strong> — Miami, Florida. Todos los derechos reservados.',
     foot_privacy: 'Privacidad',
     foot_terms: 'Términos',
@@ -178,6 +190,18 @@ const translations = {
     cta_label_email: 'Email',
     cta_label_area: 'Service Area',
     cta_area: 'Miami-Dade & Broward',
+    form_name: 'Name',
+    form_phone: 'Phone',
+    form_email: 'Email',
+    form_service: 'Service',
+    form_message: 'Tell us what you need',
+    form_name_ph: 'Your full name',
+    form_phone_ph: '(305) 555-0123',
+    form_email_ph: 'name@email.com',
+    form_message_ph: 'Describe the project, urgency, location, or important details...',
+    form_submit: 'Send via WhatsApp',
+    form_helper: 'Your message will open in WhatsApp with the details already organized and ready to send.',
+    form_services: ['Electrical', 'Plumbing', 'Roofing', 'Construction', 'Other'],
     foot_copy: '© 2025 <strong>REC PROBUILD LLC</strong> — Miami, Florida. All rights reserved.',
     foot_privacy: 'Privacy',
     foot_terms: 'Terms',
@@ -300,6 +324,26 @@ function applyTranslations(lang) {
     const lb=contactItems[2].querySelector('.c-label'); if(lb) lb.textContent=t.cta_label_area;
     const val=contactItems[2].querySelector('.c-val'); if(val) val.textContent=t.cta_area;
   }
+  const formLabels = document.querySelectorAll('#contactForm .form-label');
+  const formLabelKeys = ['form_name','form_phone','form_email','form_service','form_message'];
+  formLabels.forEach((label, i) => { if (t[formLabelKeys[i]]) label.textContent = t[formLabelKeys[i]]; });
+  const nameInput = document.getElementById('waName'); if (nameInput) nameInput.placeholder = t.form_name_ph;
+  const phoneInput = document.getElementById('waPhone'); if (phoneInput) phoneInput.placeholder = t.form_phone_ph;
+  const emailInput = document.getElementById('waEmail'); if (emailInput) emailInput.placeholder = t.form_email_ph;
+  const messageInput = document.getElementById('waMessage'); if (messageInput) messageInput.placeholder = t.form_message_ph;
+  const serviceSelect = document.getElementById('waService');
+  if (serviceSelect && Array.isArray(t.form_services)) {
+    Array.from(serviceSelect.options).forEach((option, i) => {
+      if (t.form_services[i]) {
+        option.textContent = t.form_services[i];
+        option.value = t.form_services[i];
+      }
+    });
+  }
+  const formSubmit = document.querySelector('#contactForm .form-submit span');
+  if (formSubmit) formSubmit.textContent = t.form_submit;
+  const formHelper = document.querySelector('#contactForm .form-helper');
+  if (formHelper) formHelper.textContent = t.form_helper;
   // Footer
   const footCopy = document.querySelector('.foot-copy');
   if (footCopy) footCopy.innerHTML = t.foot_copy;
@@ -318,3 +362,27 @@ document.getElementById('langToggle').addEventListener('click', function() {
   document.documentElement.lang = currentLang;
   applyTranslations(currentLang);
 });
+
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('waName').value.trim();
+    const phone = document.getElementById('waPhone').value.trim();
+    const email = document.getElementById('waEmail').value.trim();
+    const service = document.getElementById('waService').value.trim();
+    const message = document.getElementById('waMessage').value.trim();
+    const intro = currentLang === 'es' ? 'Hola, quiero información sobre REC PROBUILD.' : 'Hello, I would like information about REC PROBUILD.';
+    const body = [
+      intro,
+      '',
+      (currentLang === 'es' ? 'Nombre' : 'Name') + ': ' + name,
+      (currentLang === 'es' ? 'Teléfono' : 'Phone') + ': ' + phone,
+      'Email: ' + email,
+      (currentLang === 'es' ? 'Servicio' : 'Service') + ': ' + service,
+      (currentLang === 'es' ? 'Mensaje' : 'Message') + ': ' + message
+    ].join('\n');
+    const waUrl = 'https://wa.me/13055550000?text=' + encodeURIComponent(body);
+    window.open(waUrl, '_blank');
+  });
+}
