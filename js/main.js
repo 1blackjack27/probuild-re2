@@ -101,7 +101,7 @@ const translations = {
     form_service: 'Servicio',
     form_message: 'Cuéntanos qué necesitas',
     form_name_ph: 'Tu nombre completo',
-    form_phone_ph: '(305) 555-0123',
+    form_phone_ph: '(305) 898-2573',
     form_email_ph: 'tu@email.com',
     form_message_ph: 'Describe el proyecto, urgencia, ubicación o detalles importantes...',
     form_submit: 'Enviar por WhatsApp',
@@ -196,7 +196,7 @@ const translations = {
     form_service: 'Service',
     form_message: 'Tell us what you need',
     form_name_ph: 'Your full name',
-    form_phone_ph: '(305) 555-0123',
+    form_phone_ph: '(305) 898-2573',
     form_email_ph: 'name@email.com',
     form_message_ph: 'Describe the project, urgency, location, or important details...',
     form_submit: 'Send via WhatsApp',
@@ -382,7 +382,7 @@ if (contactForm) {
       (currentLang === 'es' ? 'Servicio' : 'Service') + ': ' + service,
       (currentLang === 'es' ? 'Mensaje' : 'Message') + ': ' + message
     ].join('\n');
-    const waUrl = 'https://wa.me/13055550000?text=' + encodeURIComponent(body);
+    const waUrl = 'https://wa.me/13058982573?text=' + encodeURIComponent(body);
     window.open(waUrl, '_blank');
   });
 }
