@@ -219,6 +219,52 @@ body {
   animation: fadeUp .9s .9s forwards;
 }
 .hero-sub strong { color: var(--white); font-weight: 500; }
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 12px;
+  width: 100%;
+}
+.hero-tags span {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+@media (min-width: 601px) {
+  .hero-tags {
+    gap: 0 16px;
+  }
+  .hero-tags span:not(:last-child)::after {
+    content: "·";
+    margin-left: 16px;
+    color: var(--gold);
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-tags {
+    gap: 8px 10px;
+    max-width: 340px;
+    margin: 0 auto 16px;
+  }
+  .hero-tags span {
+    font-size: 0.82rem;
+    padding: 3px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    color: var(--white);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
 .hero-btns {
   display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
   opacity: 0; animation: fadeUp .9s 1.1s forwards;
