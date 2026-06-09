@@ -655,6 +655,68 @@ footer {
 ══════════════════════════════════════ */
 .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
 .reveal.on { opacity:1; transform:translateY(0); }
+}
+.divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--glass-bd); }
+.contacts { display:flex; justify-content:center; gap:38px; flex-wrap:wrap; }
+.contact-item { display:flex; flex-direction:column; align-items:center; gap:5px; }
+.c-label { font-family:var(--fd); font-size:.56rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--gold-dim); }
+.c-val { font-family:var(--fd); font-size:1rem; font-weight:700; color:var(--white); text-decoration:none; transition:color .2s; }
+.c-val:hover { color:var(--gold); }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer {
+  background:var(--obsidian-3); border-top:1px solid var(--glass-bd);
+  padding:36px 48px; display:flex; align-items:center; justify-content:space-between;
+  position:relative; z-index:2;
+}
+.foot-copy { font-size:.76rem; color:rgba(245,243,239,.3); font-weight:300; }
+.foot-copy strong { color:var(--gold-dim); font-weight:500; }
+.foot-links { display:flex; gap:26px; list-style:none; }
+.foot-links a { font-family:var(--fd); font-size:.58rem; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:rgba(245,243,239,.3); text-decoration:none; transition:color .2s; }
+.foot-links a:hover { color:var(--gold); }
+.foot-links svg { width: 18px; height: 18px; transition: transform .3s; }
+.foot-links a:hover svg { transform: scale(1.15) translateY(-2px); }
+.foot-badge { display:flex; align-items:center; gap:7px; font-family:var(--fd); font-size:.58rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:rgba(201,150,58,.45); }
+
+/* ══════════════════════════════════════
+   WHATSAPP FLOAT
+══════════════════════════════════════ */
+.wa-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,.4), 0 0 0 0 rgba(37,211,102,.5);
+  z-index: 1000;
+  transition: transform .3s, box-shadow .3s;
+  animation: waPulse 2s infinite;
+}
+.wa-float svg { width: 32px; height: 32px; }
+.wa-float:hover {
+  transform: scale(1.1) translateY(-4px);
+  animation: none;
+  box-shadow: 0 10px 30px rgba(37,211,102,.6);
+}
+@keyframes waPulse {
+  0% { box-shadow: 0 4px 20px rgba(37,211,102,.4), 0 0 0 0 rgba(37,211,102,.5); }
+  70% { box-shadow: 0 4px 20px rgba(37,211,102,.4), 0 0 0 16px rgba(37,211,102,0); }
+  100% { box-shadow: 0 4px 20px rgba(37,211,102,.4), 0 0 0 0 rgba(37,211,102,0); }
+}
+
+/* ══════════════════════════════════════
+   REVEAL ON SCROLL
+══════════════════════════════════════ */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.on { opacity:1; transform:translateY(0); }
 .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
 
 /* ══════════════════════════════════════
@@ -668,6 +730,8 @@ footer {
   .pillars{grid-template-columns:1fr;}
   .srv-grid{grid-template-columns:1fr;}
   .srv-card{height:300px;}
+  .srv-body { padding: 24px; }
+  .srv-name { font-size: 1.15rem; letter-spacing: -0.015em; }
   .why-grid{grid-template-columns:1fr;gap:52px;}
 
     .proc-steps{grid-template-columns:1fr 1fr;row-gap:44px;}
@@ -677,4 +741,10 @@ footer {
 
   footer{flex-direction:column;gap:20px;text-align:center;}
   .foot-links{justify-content:center;}
+}
+
+@media(max-width:600px){
+  .hero-content { padding: 0 16px; }
+  .hero-h1 { padding: 0 8px; font-size: clamp(1.4rem, 8vw, 2.2rem); }
+  .nav-wordmark { display: none; }
 }
